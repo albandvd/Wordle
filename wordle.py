@@ -1,13 +1,13 @@
-import random
+from random import randint
 import copy
 
-list_word=["aladin"]
-
 def choose_word():
-    rand_word=random.choice(list_word)
     lettre_list = []
-    for lettre in rand_word:
-        lettre_list.append(lettre)
+    with open("liste_wordle.txt", "r") as fic:
+        list_word = fic.readlines()
+        rand_word = list_word[randint(0, len(list_word) -1 )].rstrip("\n")
+        for lettre in rand_word:
+            lettre_list.append(lettre)
     return(lettre_list)
 
 def word_try(espace):
@@ -75,7 +75,8 @@ def principal():
     rejouer()
 
 def rejouer():
-    choix = input("Veux tu rejouer ? ['oui'] ou ['non'] ")
+    print(". Veux tu rejouer ? ['oui'] ou ['non'] ")
+    choix = input()
     if choix == "oui":
         principal()
 
